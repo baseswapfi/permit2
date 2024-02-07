@@ -64,11 +64,22 @@ const config: HardhatUserConfig = {
       accounts,
       chainId: 534351,
     },
+    mode: {
+      url: process.env.MODE_RPC,
+      accounts,
+      chainId: 34443,
+    },
+    modeTestnet: {
+      url: process.env.MODE_TESTNET_RPC,
+      accounts,
+      chainId: 919,
+    },
   },
   etherscan: {
     apiKey: {
       scrollSepolia: "abc",
-      scroll: process.env.SCROLL_SCAN_API_KEY,
+      scroll: process.env.SCROLL_SCAN_API_KEY || "",
+      mode: "mode",
     },
     customChains: [
       {
@@ -85,6 +96,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://api.scrollscan.com/api",
           browserURL: "https://scrollscan.com/",
+        },
+      },
+      {
+        network: "mode",
+        chainId: 34443,
+        urls: {
+          apiURL: "https://api.routescan.io/v2/network/mainnet/evm/34443/etherscan",
+          browserURL: "https://modescan.io",
         },
       },
     ],
